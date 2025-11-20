@@ -5,14 +5,14 @@ import type { Level, Position, Command } from '../types/index';
 interface GamePageProps {
   level: Level;
   levels: Level[];
-  bunnyPos: Position;
+ bunnyPos: Position;
   carrotPos: Position;
   commands: Command[];
   currentStep: number;
   isRunning: boolean;
   gameWon: boolean;
-  gridSize: number;
-  onNavigate: (page: string) => void;
+ gridSize: number;
+ onNavigate: (page: string) => void;
   onAddCommand: (command: Command) => void;
   onRemoveLastCommand: () => void;
   onClearCommands: () => void;
@@ -41,7 +41,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
     onResetGame,
     onNextLevel,
     onPrevLevel
-  } = props;
+ } = props;
 
   const commandIcons = {
     up: <ArrowUp className="w-6 h-6 text-gray-800" />,
@@ -53,35 +53,32 @@ const GamePage: React.FC<GamePageProps> = (props) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-4">
-          <button
-            onClick={() => onNavigate('menu')}
-            className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 font-bold"
-          >
-            ← Meniu
-          </button>
-        </div>
-
-        <h1 className="text-4xl font-bold text-center mb-2 text-green-800">🐰 Jocul Iepurașului</h1>
+        <h1 className="text-4xl font-bold text-center mb-2 text-green-800">🐰 Code Bunny</h1>
         <p className="text-center text-gray-700 mb-6">Ajută iepurașul să ajungă la morcov!</p>
 
         <div className="bg-white rounded-lg shadow-lg p-4 mb-6">
           <div className="flex items-center justify-between">
             <button
+              onClick={() => onNavigate('menu')}
+              className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 font-bold mr-4"
+            >
+              ← Meniu
+            </button>
+            <button
               onClick={onPrevLevel}
               disabled={level.id === 1}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600"
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 mr-4"
             >
               ← Anterior
             </button>
-            <div className="text-center">
-              <p className="text-xl font-bold text-gray-800">{level.name}</p>
+            <div className="text-center flex-1">
+              <p className="text-xl font-bold text-gray-800 mb-1">{level.name}</p>
               <p className="text-sm text-gray-600">Nivel {level.id} din {levels.length}</p>
             </div>
             <button
               onClick={onNextLevel}
               disabled={level.id === levels.length}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600"
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-600 ml-4"
             >
               Următor →
             </button>
@@ -102,7 +99,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                       return (
                         <div
                           key={`${x}-${y}`}
-                          className={`w-12 h-12 border border-green-200 flex items-center justify-center text-3xl
+                          className={`w-12 h-12 border border-green-20 flex items-center justify-center text-3xl
                             ${(x + y) % 2 === 0 ? 'bg-green-50' : 'bg-white'}
                             ${isBunny && isCarrot ? 'bg-yellow-200' : ''}`}
                         >
@@ -141,14 +138,14 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                   <button
                     onClick={() => props.onAddCommand('down')}
                     disabled={isRunning}
-                    className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                    className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-60 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
                     <ArrowDown className="w-8 h-8" />
                   </button>
                   <button
                     onClick={() => props.onAddCommand('right')}
                     disabled={isRunning}
-                    className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                    className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-60 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
                     <ArrowRight className="w-8 h-8" />
                   </button>
@@ -218,7 +215,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                 <div
                   key={index}
                   className={`p-2 rounded-lg flex items-center justify-center
-                    ${currentStep === index ? 'bg-yellow-400 scale-110' : 'bg-white'}
+                    ${currentStep === index ? 'bg-yellow-40 scale-110' : 'bg-white'}
                     ${currentStep > index ? 'bg-green-200' : ''}
                     transition-all duration-300 border-2 border-gray-300`}
                 >

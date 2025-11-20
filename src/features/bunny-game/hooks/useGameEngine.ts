@@ -7,6 +7,11 @@ const levelsData: Omit<Level, 'id'>[] = [
   { bunny: { x: 0, y: 0 }, carrot: { x: 3, y: 3 }, name: "Nivel 3 - Diagonal" },
   { bunny: { x: 7, y: 7 }, carrot: { x: 0, y: 0 }, name: "Nivel 4 - Întoarcere" },
   { bunny: { x: 0, y: 0 }, carrot: { x: 7, y: 7 }, name: "Nivel 5 - Distanță mare" },
+  { bunny: { x: 2, y: 2 }, carrot: { x: 5, y: 5 }, name: "Nivel 6 - Zig-zag" },
+  { bunny: { x: 0, y: 7 }, carrot: { x: 7, y: 0 }, name: "Nivel 7 - Colțuri opuse" },
+  { bunny: { x: 4, y: 0 }, carrot: { x: 4, y: 7 }, name: "Nivel 8 - Culoar vertical" },
+  { bunny: { x: 7, y: 3 }, carrot: { x: 0, y: 3 }, name: "Nivel 9 - Culoar orizontal" },
+  { bunny: { x: 3, y: 4 }, carrot: { x: 6, y: 1 }, name: "Nivel 10 - Provocare" },
 ];
 
 const levels: Level[] = levelsData.map((level, index) => ({ ...level, id: index + 1 }));
