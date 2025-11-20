@@ -44,10 +44,10 @@ const GamePage: React.FC<GamePageProps> = (props) => {
   } = props;
 
   const commandIcons = {
-    up: <ArrowUp className="w-6 h-6" />,
-    down: <ArrowDown className="w-6 h-6" />,
-    left: <ArrowLeft className="w-6 h-6" />,
-    right: <ArrowRight className="w-6 h-6" />
+    up: <ArrowUp className="w-6 h-6 text-gray-800" />,
+    down: <ArrowDown className="w-6 h-6 text-gray-800" />,
+    left: <ArrowLeft className="w-6 h-6 text-gray-800" />,
+    right: <ArrowRight className="w-6 h-6 text-gray-800" />
   };
 
   return (
@@ -124,7 +124,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                 <div className="grid grid-cols-3 gap-3 max-w-sm mx-auto">
                   <div></div>
                   <button
-                    onClick={() => onAddCommand('up')}
+                    onClick={() => props.onAddCommand('up')}
                     disabled={isRunning}
                     className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
@@ -132,21 +132,21 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                   </button>
                   <div></div>
                   <button
-                    onClick={() => onAddCommand('left')}
+                    onClick={() => props.onAddCommand('left')}
                     disabled={isRunning}
                     className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
                     <ArrowLeft className="w-8 h-8" />
                   </button>
                   <button
-                    onClick={() => onAddCommand('down')}
+                    onClick={() => props.onAddCommand('down')}
                     disabled={isRunning}
                     className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
                     <ArrowDown className="w-8 h-8" />
                   </button>
                   <button
-                    onClick={() => onAddCommand('right')}
+                    onClick={() => props.onAddCommand('right')}
                     disabled={isRunning}
                     className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >

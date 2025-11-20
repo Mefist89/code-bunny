@@ -32,7 +32,7 @@ export const useGameEngine = () => {
 
   const addCommand = (direction: Command) => {
     if (!isRunning) {
-      setCommands([...commands, direction]);
+      setCommands(prevCommands => [...prevCommands, direction]);
     }
   };
 
