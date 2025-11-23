@@ -88,7 +88,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="flex flex-col items-center">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">Tabla de Joc</h2>
-              <div className="bg-gradient-to-br from-yellow-700 via-amber-800 to-yellow-900 rounded-xl border-4 border-yellow-950 shadow-inner shadow-lg p-2 grid grid-cols-8 gap-1">
+              <div className="bg-[#87AD3B] rounded-xl border-4 border-yellow-950 shadow-inner shadow-lg p-2 grid grid-cols-8 gap-1">
                 {[...Array(gridSize * gridSize)].map((_, i) => {
                   const x = i % gridSize;
                   const y = Math.floor(i / gridSize);
@@ -98,7 +98,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                   return (
                     <div
                       key={`${x}-${y}`}
-                      className={`aspect-square flex items-center justify-center text-3xl bg-cover bg-center rounded-md
+                      className={`aspect-square flex items-center justify-center text-3xl bg-cover bg-center rounded-md border-2 border-black
                         ${(x + y) % 2 === 0 ? "bg-[url('/box1.png')]" : "bg-[url('/box2.png')]"}
                         ${isBunny && isCarrot ? 'bg-yellow-200/50' : ''}`}
                     >
