@@ -5,14 +5,14 @@ import type { Level, Position, Command } from '../types/index';
 interface GamePageProps {
   level: Level;
   levels: Level[];
- bunnyPos: Position;
+  bunnyPos: Position;
   carrotPos: Position;
   commands: Command[];
   currentStep: number;
   isRunning: boolean;
   gameWon: boolean;
- gridSize: number;
- onNavigate: (page: string) => void;
+  gridSize: number;
+  onNavigate: (page: string) => void;
   onAddCommand: (command: Command) => void;
   onRemoveLastCommand: () => void;
   onClearCommands: () => void;
@@ -34,14 +34,13 @@ const GamePage: React.FC<GamePageProps> = (props) => {
     gameWon,
     gridSize,
     onNavigate,
-    onAddCommand,
     onRemoveLastCommand,
     onClearCommands,
     onExecuteCommands,
     onResetGame,
     onNextLevel,
     onPrevLevel
- } = props;
+  } = props;
 
   const commandIcons = {
     up: <ArrowUp className="w-6 h-6 text-gray-800" />,
