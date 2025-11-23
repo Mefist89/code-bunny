@@ -88,7 +88,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="flex flex-col items-center">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">Tabla de Joc</h2>
-              <div className="border-4 border-green-600 rounded-lg overflow-hidden">
+              <div className="bg-gradient-to-br from-yellow-700 via-amber-800 to-yellow-900 rounded-xl border-4 border-yellow-950 shadow-inner shadow-lg p-2">
                 {[...Array(gridSize)].map((_, y) => (
                   <div key={y} className="flex">
                     {[...Array(gridSize)].map((_, x) => {
@@ -98,7 +98,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                       return (
                         <div
                           key={`${x}-${y}`}
-                          className={`w-12 h-12 border border-green-20 flex items-center justify-center text-3xl
+                          className={`w-12 h-12 border border-yellow-900 flex items-center justify-center text-3xl
                             ${(x + y) % 2 === 0 ? 'bg-green-50' : 'bg-white'}
                             ${isBunny && isCarrot ? 'bg-yellow-200' : ''}`}
                         >
