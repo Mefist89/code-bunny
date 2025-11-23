@@ -41,6 +41,11 @@ const GamePage: React.FC<GamePageProps> = (props) => {
     onNextLevel,
     onPrevLevel
   } = props;
+  
+  const getObstacleAtPosition = (x: number, y: number) => {
+    if (!level.obstacles) return null;
+    return level.obstacles.find(obstacle => obstacle.x === x && obstacle.y === y);
+  };
 
   /* color arrow */
 const commandIcons = {
@@ -109,6 +114,23 @@ return (
                     >
                       {isBunny && <img src="/img/bunny1.png" alt="Bunny" className="w-12 h-12 object-contain" />}
                       {isCarrot && !isBunny && <img src="/img/carot1.png" alt="Carot" className="w-12 h-12 object-contain" />}
+                      {!isBunny && !isCarrot && (() => {
+                        const obstacle = getObstacleAtPosition(x, y);
+                        if (obstacle) {
+                          return obstacle.type === 'rock' ?
+                            <img src="/img/rock1.png" alt="Rock" className="w-10 h-10 object-contain" /> :
+                            obstacle.type === 'wood' ?
+                              <img src="/img/wood1.png" alt="Wood" className="w-10 h-10 object-contain" /> :
+                              obstacle.type === 'water' ?
+                                <img src="/img/water1.png" alt="Water" className="w-10 h-10 object-contain" /> :
+                                obstacle.type === 'bush' ?
+                                  <img src="/img/bush1.png" alt="Bush" className="w-10 h-10 object-contain" /> :
+                                  obstacle.type === 'catapult' ?
+                                    <img src="/img/catapult1.png" alt="Catapult" className="w-10 h-10 object-contain" /> :
+                                    null;
+                        }
+                        return null;
+                      })()}
                     </div>
                   );
                 })}
