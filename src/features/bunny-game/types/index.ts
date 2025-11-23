@@ -6,7 +6,13 @@ export interface Position {
 export interface Obstacle {
   x: number;
   y: number;
-  type: 'rock' | 'wood' | 'water' | 'bush' | 'catapult';
+  type: 'rock' | 'wood' | 'water' | 'bush';
+}
+
+export interface Flying {
+  x: number;
+  y: number;
+  type: 'catapult';
 }
 
 export interface Level {
@@ -15,6 +21,7 @@ export interface Level {
   carrot: Position;
   name: string;
   obstacles?: Obstacle[];
+  flying?: Flying[];
 }
 
 export type Command = 'up' | 'down' | 'left' | 'right';
