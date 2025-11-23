@@ -46,6 +46,8 @@ const BunnyCodingGame = () => {
       isRunning={gameEngine.isRunning}
       gameWon={gameEngine.gameWon}
       gridSize={gameEngine.gridSize}
+      catapultAnimation={gameEngine.catapultAnimation}
+      movementAnimation={gameEngine.movementAnimation}
       onNavigate={handleNavigate}
       onAddCommand={gameEngine.addCommand}
       onRemoveLastCommand={gameEngine.removeLastCommand}

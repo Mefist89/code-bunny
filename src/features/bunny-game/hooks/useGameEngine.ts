@@ -38,7 +38,7 @@ export const useGameEngine = () => {
   useEffect(() => {
     const currentLevel = levels[level - 1];
     setBunnyPos(currentLevel.bunny);
-    setBunnyDirection(null);
+    setBunnyDirection(null); // Reset direction when level changes
     setCarrotPos(currentLevel.carrot);
     setCommands([]);
     setGameWon(false);
@@ -114,6 +114,7 @@ export const useGameEngine = () => {
         pos = newPos;
         direction = cmd; // Track the direction the bunny is facing
         setBunnyPos(pos);
+        setBunnyDirection(cmd); // Update the bunny's facing direction
 
         // End movement animation after a delay to match animation duration
         setTimeout(() => {
@@ -150,6 +151,7 @@ export const useGameEngine = () => {
 
         if (pos.x === carrotPos.x && pos.y === carrotPos.y) {
           setGameWon(true);
+          soundManager.playCarrotCrunchSound();
           break;
         }
       }
@@ -167,6 +169,7 @@ export const useGameEngine = () => {
     setGameWon(false);
     setCurrentStep(-1);
     setCatapultAnimation(null);
+    setMovementAnimation(null);
   };
 
   const nextLevel = () => {
@@ -191,6 +194,7 @@ export const useGameEngine = () => {
     currentStep,
     gameWon,
     gridSize,
+    bunnyDirection, // Add bunnyDirection to the returned values
     addCommand,
     removeLastCommand,
     clearCommands,
