@@ -52,7 +52,10 @@ const GamePage: React.FC<GamePageProps> = (props) => {
  return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
       <div className="max-w-5xl mx-auto" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
-        <h1 className="text-4xl font-bold text-center mb-2 text-green-800">🐰 Code Bunny</h1>
+        <h1 className="text-4xl font-bold text-center mb-2 text-green-800 flex items-center justify-center gap-4">
+          <img src="/img/bunny1.png" alt="Bunny" className="h-12 w-12 object-contain" />
+          Code Bunny
+        </h1>
         <p className="text-center text-gray-700 mb-6">Ajută iepurașul să ajungă la morcov!</p>
 
         <div className="bg-white rounded-lg shadow-lg p-4 mb-6">
@@ -103,8 +106,8 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                         ${(x + y) % 2 === 0 ? "bg-[url('/box1.png')]" : "bg-[url('/box2.png')]"}
                         ${isBunny && isCarrot ? 'bg-yellow-200/50' : ''}`}
                     >
-                      {isBunny && '🐰'}
-                      {isCarrot && !isBunny && '🥕'}
+                      {isBunny && <img src="/img/bunny1.png" alt="Bunny" className="w-12 h-12 object-contain" />}
+                      {isCarrot && !isBunny && <img src="/img/carot1.png" alt="Carot" className="w-12 h-12 object-contain" />}
                     </div>
                   );
                 })}
