@@ -43,14 +43,14 @@ const GamePage: React.FC<GamePageProps> = (props) => {
   } = props;
 
   /* color arrow */
-  const commandIcons = {
-    up: <span className="text-white-500 text-2xl bg-red-500 p-2 rounded">↑</span>,
-    down: <span className="text-white-500 text-2xl bg-blue-500 p-2 rounded">↓</span>,
-    left: <span className="text-white-500 text-2xl bg-green-500 p-2 rounded">←</span>,
-    right: <span className="text-white-500 text-2xl bg-orange-500 p-2 rounded">→</span>
-  };
+const commandIcons = {
+  up: <span className="text-white text-2xl bg-red-500 p-2 rounded">↑</span>,
+  down: <span className="text-white text-2xl bg-blue-500 p-2 rounded">↓</span>,
+  left: <span className="text-white text-2xl bg-green-500 p-2 rounded">←</span>,
+  right: <span className="text-white text-2xl bg-orange-500 p-2 rounded">→</span>
+};
 
- return (
+return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-green-50 to-blue-50 p-8" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
       <div className="max-w-5xl mx-auto" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
         <h1 className="text-4xl font-bold text-center mb-2 text-green-800 flex items-center justify-center gap-4">
@@ -59,7 +59,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
         </h1>
         <p className="text-center text-gray-700 mb-6">Ajută iepurașul să ajungă la morcov!</p>
 
-        <div className="bg-white rounded-lg shadow-lg p-4 mb-6">
+        <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-4 mb-6">
           <div className="flex items-center justify-between">
             <button
               onClick={() => onNavigate('menu')}
@@ -88,7 +88,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="flex flex-col items-center">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">Tabla de Joc</h2>
@@ -127,7 +127,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                     disabled={isRunning}
                     className="bg-red-500 text-white p-4 rounded-lg hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
-                    <span className="text-white-500 text-3xl">↑</span>
+                    <span className="text-white text-3xl">↑</span>
                   </button>
                   <div></div>
                   <button
@@ -135,21 +135,21 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                     disabled={isRunning}
                     className="bg-green-500 text-white p-4 rounded-lg hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
-                    <span className="text-white-500 text-3xl">←</span>
+                    <span className="text-white text-3xl">←</span>
                   </button>
                   <button
                     onClick={() => props.onAddCommand('down')}
                     disabled={isRunning}
                     className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
-                    <span className="text-white-500 text-3xl">↓</span>
+                    <span className="text-white text-3xl">↓</span>
                   </button>
                   <button
                     onClick={() => props.onAddCommand('right')}
                     disabled={isRunning}
                     className="bg-orange-500 text-white p-4 rounded-lg hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
-                    <span className="text-white-500 text-3xl">→</span>
+                    <span className="text-white text-3xl">→</span>
                   </button>
                 </div>
               </div>
@@ -191,7 +191,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
           </div>
         </div>
 
-        <div className="mt-6 bg-white rounded-lg shadow-lg p-6">
+        <div className="mt-6 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6">
           <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Secvența ta de comenzi</h2>
           
           {gameWon && (
@@ -217,9 +217,9 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                 <div
                   key={index}
                   className={`p-2 rounded-lg flex items-center justify-center
-                    ${currentStep === index ? 'bg-yellow-40 scale-110' : 'bg-white'}
+                    ${currentStep === index ? 'bg-yellow-400/30 scale-110' : ''}
                     ${currentStep > index ? 'bg-green-200' : ''}
-                    transition-all duration-300 border-2 border-gray-300`}
+                    transition-all duration-300`}
                 >
                   {commandIcons[cmd]}
                 </div>
