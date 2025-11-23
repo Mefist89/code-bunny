@@ -51,7 +51,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-2 text-green-800">🐰 Code Bunny</h1>
         <p className="text-center text-gray-700 mb-6">Ajută iepurașul să ajungă la morcov!</p>
 

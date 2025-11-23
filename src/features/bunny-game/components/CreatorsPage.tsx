@@ -7,7 +7,7 @@ interface CreatorsPageProps {
 const CreatorsPage: React.FC<CreatorsPageProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8">
-      <div className="max-w-7xl mx-auto flex flex-col items-center py-10">
+      <div className="max-w-5xl mx-auto flex flex-col items-center py-10">
         <h1 className="text-4xl font-bold text-center mb-8 text-green-800">👨‍💻 Creatori</h1>
         
         <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl w-full mb-8 text-center">

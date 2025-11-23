@@ -8,7 +8,7 @@ interface MenuPageProps {
 const MenuPage: React.FC<MenuPageProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8">
-      <div className="max-w-7xl mx-auto flex flex-col items-center justify-center min-h-screen">
+      <div className="max-w-5xl mx-auto flex flex-col items-center justify-center min-h-screen">
         <h1 className="text-5xl font-bold text-center mb-4 text-green-800">🐰 Code Bunny</h1>
         <p className="text-center text-gray-700 mb-10 text-xl">Învață să programezi jucându-te!</p>
         

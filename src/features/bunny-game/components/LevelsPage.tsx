@@ -13,7 +13,7 @@ interface LevelsPageProps {
 const LevelsPage: React.FC<LevelsPageProps> = ({ levels, onSelectLevel, onNavigate }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8">
-      <div className="max-w-7xl mx-auto flex flex-col items-center py-10">
+      <div className="max-w-5xl mx-auto flex flex-col items-center py-10">
         <h1 className="text-4xl font-bold text-center mb-8 text-green-800">📊 Niveluri</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl mb-8">
