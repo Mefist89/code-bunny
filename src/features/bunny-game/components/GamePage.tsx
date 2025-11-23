@@ -98,9 +98,9 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                       return (
                         <div
                           key={`${x}-${y}`}
-                          className={`w-12 h-12 border border-yellow-900 flex items-center justify-center text-3xl
-                            ${(x + y) % 2 === 0 ? 'bg-green-50' : 'bg-white'}
-                            ${isBunny && isCarrot ? 'bg-yellow-200' : ''}`}
+                          className={`w-12 h-12 border border-yellow-900 flex items-center justify-center text-3xl bg-cover bg-center
+                            ${(x + y) % 2 === 0 ? "bg-[url('/box1.png')]" : "bg-[url('/box2.png')]"}
+                            ${isBunny && isCarrot ? 'bg-yellow-200/50' : ''}`}
                         >
                           {isBunny && '🐰'}
                           {isCarrot && !isBunny && '🥕'}
