@@ -1,5 +1,5 @@
 import React from 'react';
-import startImage from '../../../assets/img/start.png';
+import startImage from '/img/start.png';
 
 interface MenuPageProps {
   onNavigate: (page: string) => void;
