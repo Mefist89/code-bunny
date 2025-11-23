@@ -49,9 +49,9 @@ const GamePage: React.FC<GamePageProps> = (props) => {
     right: <ArrowRight className="w-6 h-6 text-gray-800" />
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8">
-      <div className="max-w-5xl mx-auto">
+ return (
+    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
+      <div className="max-w-5xl mx-auto" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
         <h1 className="text-4xl font-bold text-center mb-2 text-green-800">🐰 Code Bunny</h1>
         <p className="text-center text-gray-700 mb-6">Ajută iepurașul să ajungă la morcov!</p>
 
@@ -88,6 +88,7 @@ const GamePage: React.FC<GamePageProps> = (props) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="flex flex-col items-center">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">Tabla de Joc</h2>
+              /* фон таблице  bg-[#87AD3B] */
               <div className="bg-[#87AD3B] rounded-xl border-4 border-yellow-950 shadow-inner shadow-lg p-2 grid grid-cols-8 gap-1">
                 {[...Array(gridSize * gridSize)].map((_, i) => {
                   const x = i % gridSize;
