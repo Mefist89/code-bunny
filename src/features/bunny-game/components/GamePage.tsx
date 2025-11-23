@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Play, RotateCcw, Trash2 } from 'lucide-react';
+import { Play, RotateCcw, Trash2 } from 'lucide-react';
 import type { Level, Position, Command } from '../types/index';
 
 interface GamePageProps {
@@ -42,15 +42,16 @@ const GamePage: React.FC<GamePageProps> = (props) => {
     onPrevLevel
   } = props;
 
+  /* color arrow */
   const commandIcons = {
-    up: <ArrowUp className="w-6 h-6 text-gray-800" />,
-    down: <ArrowDown className="w-6 h-6 text-gray-800" />,
-    left: <ArrowLeft className="w-6 h-6 text-gray-800" />,
-    right: <ArrowRight className="w-6 h-6 text-gray-800" />
+    up: <span className="text-white-500 text-2xl bg-red-500 p-2 rounded">↑</span>,
+    down: <span className="text-white-500 text-2xl bg-blue-500 p-2 rounded">↓</span>,
+    left: <span className="text-white-500 text-2xl bg-green-500 p-2 rounded">←</span>,
+    right: <span className="text-white-500 text-2xl bg-orange-500 p-2 rounded">→</span>
   };
 
  return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-green-50 to-blue-50 p-8" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
       <div className="max-w-5xl mx-auto" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
         <h1 className="text-4xl font-bold text-center mb-2 text-green-800 flex items-center justify-center gap-4">
           <img src="/img/bunny1.png" alt="Bunny" className="h-12 w-12 object-contain" />
@@ -124,31 +125,31 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                   <button
                     onClick={() => props.onAddCommand('up')}
                     disabled={isRunning}
-                    className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                    className="bg-red-500 text-white p-4 rounded-lg hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
-                    <ArrowUp className="w-8 h-8" />
+                    <span className="text-white-500 text-3xl">↑</span>
                   </button>
                   <div></div>
                   <button
                     onClick={() => props.onAddCommand('left')}
                     disabled={isRunning}
-                    className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                    className="bg-green-500 text-white p-4 rounded-lg hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
-                    <ArrowLeft className="w-8 h-8" />
+                    <span className="text-white-500 text-3xl">←</span>
                   </button>
                   <button
                     onClick={() => props.onAddCommand('down')}
                     disabled={isRunning}
-                    className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-60 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                    className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
-                    <ArrowDown className="w-8 h-8" />
+                    <span className="text-white-500 text-3xl">↓</span>
                   </button>
                   <button
                     onClick={() => props.onAddCommand('right')}
                     disabled={isRunning}
-                    className="bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-60 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                    className="bg-orange-500 text-white p-4 rounded-lg hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
                   >
-                    <ArrowRight className="w-8 h-8" />
+                    <span className="text-white-500 text-3xl">→</span>
                   </button>
                 </div>
               </div>
