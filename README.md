@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# Code Bunny - Educational Programming Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+Code Bunny is an educational programming game designed for first-grade children to develop algorithmic thinking skills. The game teaches basic programming concepts through a fun, interactive bunny character that must navigate to reach a carrot by following a sequence of commands.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Architecture
 
-## React Compiler
+The application follows a React-based component architecture with the following structure:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Main Components**:
+  - [`BunnyCodingGame.tsx`](src/BunnyCodingGame.tsx:1) - Main game controller that manages page navigation and state
+  - [`App.tsx`](src/App.tsx:1) - Root application component
 
-## Expanding the ESLint configuration
+- **Feature Module**:
+  - [`src/features/bunny-game/`](src/features/bunny-game/) - Contains all game-related functionality
+    - **Components**: MenuPage, GamePage, LevelsPage, HowToPlayPage, CreatorsPage
+    - **Hooks**: useGameEngine - Central game logic manager
+    - **Types**: TypeScript interfaces and type definitions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technologies
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend Framework**: React 19.2.0 with TypeScript
+- **Build Tool**: Vite 7.2.4
+- **Styling**: Tailwind CSS with custom animations
+- **Icons**: Lucide React
+- **Development**: ESLint, TypeScript, PostCSS, Autoprefixer
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Functionality
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Core Features:
+- **Interactive Game Board**: 8x8 grid where the bunny navigates to reach the carrot
+- **Command System**: Users create sequences of movement commands (up, down, left, right)
+- **Multiple Levels**: 15 progressively challenging levels with different obstacles
+- **Obstacles**: Rocks, wood, water, bushes that block the bunny's path
+- **Special Elements**: Catapults that launch the bunny forward when stepped on
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Game Mechanics:
+- **Movement Controls**: Arrow buttons to add commands to the sequence
+- **Execution Engine**: Step-by-step execution of command sequences
+- **Animation System**: Visual feedback for bunny movement and catapult launches
+- **Level Management**: Navigation between different levels with progress tracking
+- **Win Conditions**: Automatic detection when bunny reaches the carrot
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### User Interface:
+- **Menu System**: Main menu with options for gameplay, level selection, instructions
+- **Responsive Design**: Works on different screen sizes with scaling
+- **Visual Feedback**: Animations for movement, win states, and interactive elements
+- **Command Visualization**: Visual display of the command sequence being executed
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Game Elements:
+- **Bunny Character**: The player-controlled character
+- **Carrot Goal**: The target destination
+- **Obstacles**: Various types including rocks, wood, water, and bushes
+- **Catapults**: Special elements that launch the bunny forward in the direction it's facing
+
+## How to Run
+
+1. Install dependencies: `npm install`
+2. Start development server: `npm run dev`
+3. Build for production: `npm run build`
+
+The game is designed to be intuitive for young children while teaching fundamental programming concepts like sequencing, logical thinking, and problem-solving.
