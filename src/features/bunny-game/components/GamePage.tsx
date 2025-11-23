@@ -88,27 +88,25 @@ const GamePage: React.FC<GamePageProps> = (props) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="flex flex-col items-center">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">Tabla de Joc</h2>
-              <div className="bg-gradient-to-br from-yellow-700 via-amber-800 to-yellow-900 rounded-xl border-4 border-yellow-950 shadow-inner shadow-lg p-2">
-                {[...Array(gridSize)].map((_, y) => (
-                  <div key={y} className="flex">
-                    {[...Array(gridSize)].map((_, x) => {
-                      const isBunny = bunnyPos.x === x && bunnyPos.y === y;
-                      const isCarrot = carrotPos.x === x && carrotPos.y === y;
-                      
-                      return (
-                        <div
-                          key={`${x}-${y}`}
-                          className={`w-12 h-12 border border-yellow-900 flex items-center justify-center text-3xl bg-cover bg-center
-                            ${(x + y) % 2 === 0 ? "bg-[url('/box1.png')]" : "bg-[url('/box2.png')]"}
-                            ${isBunny && isCarrot ? 'bg-yellow-200/50' : ''}`}
-                        >
-                          {isBunny && '🐰'}
-                          {isCarrot && !isBunny && '🥕'}
-                        </div>
-                      );
-                    })}
-                  </div>
-                ))}
+              <div className="bg-gradient-to-br from-yellow-700 via-amber-800 to-yellow-900 rounded-xl border-4 border-yellow-950 shadow-inner shadow-lg p-2 grid grid-cols-8 gap-1">
+                {[...Array(gridSize * gridSize)].map((_, i) => {
+                  const x = i % gridSize;
+                  const y = Math.floor(i / gridSize);
+                  const isBunny = bunnyPos.x === x && bunnyPos.y === y;
+                  const isCarrot = carrotPos.x === x && carrotPos.y === y;
+
+                  return (
+                    <div
+                      key={`${x}-${y}`}
+                      className={`aspect-square flex items-center justify-center text-3xl bg-cover bg-center rounded-md
+                        ${(x + y) % 2 === 0 ? "bg-[url('/box1.png')]" : "bg-[url('/box2.png')]"}
+                        ${isBunny && isCarrot ? 'bg-yellow-200/50' : ''}`}
+                    >
+                      {isBunny && '🐰'}
+                      {isCarrot && !isBunny && '🥕'}
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
