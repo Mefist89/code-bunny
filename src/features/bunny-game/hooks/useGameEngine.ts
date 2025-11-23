@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Level, Position, Command } from '../types/index';
+import { soundManager } from '../../../utils/soundManager';
 
 const levelsData: Omit<Level, 'id'>[] = [
   { bunny: { x: 0, y: 0 }, carrot: { x: 3, y: 0 }, name: "Nivel 1 - Simplu" },
@@ -85,49 +86,72 @@ export const useGameEngine = () => {
       else if (cmd === 'left' && pos.x > 0) newPos.x -= 1;
       else if (cmd === 'right' && pos.x < gridSize - 1) newPos.x += 1;
 
-      // Start movement animation
-      setMovementAnimation({ active: true, startX: oldPos.x, startY: oldPos.y, endX: newPos.x, endY: newPos.y });
+      // Check if the new position has an obstacle that blocks movement
+      const hasObstacle = currentLevel.obstacles?.some(obstacle =>
+        obstacle.x === newPos.x && obstacle.y === newPos.y &&
+        (obstacle.type === 'rock' || obstacle.type === 'wood' || obstacle.type === 'water' || obstacle.type === 'bush')
+      );
 
-      pos = newPos;
-      direction = cmd; // Track the direction the bunny is facing
-      setBunnyPos(pos);
-
-      // End movement animation after a delay to match animation duration
-      setTimeout(() => {
-        setMovementAnimation(null);
-      }, 400); // Using 400ms as a middle ground between 300-500ms
-
-      // Check if the bunny landed on a catapult
-      if (currentLevel.flying) {
-        const catapult = currentLevel.flying.find(obs => obs.type === 'catapult' && obs.x === pos.x && obs.y === pos.y);
-        if (catapult) {
-          // Start catapult animation
-          setCatapultAnimation({ active: true, x: pos.x, y: pos.y });
-          
-          // Launch the bunny 2 spaces forward in the direction it's facing
-          const launchPos = { ...pos };
-          if (direction === 'up' && launchPos.y > 1) launchPos.y -= 2;
-          else if (direction === 'down' && launchPos.y < gridSize - 2) launchPos.y += 2;
-          else if (direction === 'left' && launchPos.x > 1) launchPos.x -= 2;
-          else if (direction === 'right' && launchPos.x < gridSize - 2) launchPos.x += 2;
-          else {
-            // If the launch would go out of bounds, stay on catapult
-            setCatapultAnimation(null);
-            break;
-          }
-          pos = launchPos;
-          setBunnyPos(pos);
-          
-          // End animation after delay to allow visual effect to complete
-          setTimeout(() => {
-            setCatapultAnimation(null);
-          }, 1000); // 1 second to match animation duration
-        }
-      }
-
-      if (pos.x === carrotPos.x && pos.y === carrotPos.y) {
-        setGameWon(true);
+      if (hasObstacle) {
+        // Play "ouch" sound effect
+        soundManager.playCollisionSound();
+        
+        // Stop the bunny at the current position (don't move to the obstacle position)
+        // Start movement animation to show the impact
+        setMovementAnimation({ active: true, startX: oldPos.x, startY: oldPos.y, endX: pos.x, endY: pos.y });
+        
+        // End movement animation after a delay to show the impact
+        setTimeout(() => {
+          setMovementAnimation(null);
+        }, 400);
+        
+        // Stop executing further commands after collision
         break;
+      } else {
+        // Start movement animation
+        setMovementAnimation({ active: true, startX: oldPos.x, startY: oldPos.y, endX: newPos.x, endY: newPos.y });
+
+        pos = newPos;
+        direction = cmd; // Track the direction the bunny is facing
+        setBunnyPos(pos);
+
+        // End movement animation after a delay to match animation duration
+        setTimeout(() => {
+          setMovementAnimation(null);
+        }, 400); // Using 400ms as a middle ground between 300-500ms
+
+        // Check if the bunny landed on a catapult
+        if (currentLevel.flying) {
+          const catapult = currentLevel.flying.find(obs => obs.type === 'catapult' && obs.x === pos.x && obs.y === pos.y);
+          if (catapult) {
+            // Start catapult animation
+            setCatapultAnimation({ active: true, x: pos.x, y: pos.y });
+            
+            // Launch the bunny 2 spaces forward in the direction it's facing
+            const launchPos = { ...pos };
+            if (direction === 'up' && launchPos.y > 1) launchPos.y -= 2;
+            else if (direction === 'down' && launchPos.y < gridSize - 2) launchPos.y += 2;
+            else if (direction === 'left' && launchPos.x > 1) launchPos.x -= 2;
+            else if (direction === 'right' && launchPos.x < gridSize - 2) launchPos.x += 2;
+            else {
+              // If the launch would go out of bounds, stay on catapult
+              setCatapultAnimation(null);
+              break;
+            }
+            pos = launchPos;
+            setBunnyPos(pos);
+            
+            // End animation after delay to allow visual effect to complete
+            setTimeout(() => {
+              setCatapultAnimation(null);
+            }, 1000); // 1 second to match animation duration
+          }
+        }
+
+        if (pos.x === carrotPos.x && pos.y === carrotPos.y) {
+          setGameWon(true);
+          break;
+        }
       }
     }
 
