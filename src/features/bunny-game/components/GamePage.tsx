@@ -212,7 +212,6 @@ return (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="flex flex-col items-center">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">Tabla de Joc</h2>
-              /* фон таблице  bg-[#87AD3B] */
               <div className="bg-[#87AD3B] rounded-xl border-4 border-yellow-950 shadow-inner shadow-lg p-2 grid grid-cols-8 gap-1">
                 {[...Array(gridSize * gridSize)].map((_, i) => {
                   const x = i % gridSize;
