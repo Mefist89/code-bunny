@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+// Removed soundManager import since we're using HTML5 Audio API directly
 
 interface LoadingPageProps {
  onLoadingComplete: () => void;
@@ -7,6 +8,8 @@ interface LoadingPageProps {
 const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
   const [currentAsset, setCurrentAsset] = useState('Загрузка...');
+  // Ref to keep track of the audio element for background music
+  const bgAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // List of all assets to preload
   const assets = [
@@ -33,6 +36,22 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
   ];
 
   useEffect(() => {
+    // Start background music when component mounts
+    const bgAudio = new Audio('/sounds/bg.mp3');
+    bgAudio.loop = true;
+    bgAudio.volume = 0.5;
+    bgAudioRef.current = bgAudio;
+    
+    // Play the background music with error handling for autoplay policies
+    const playPromise = bgAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log("Autoplay prevented for background music:", error);
+        // If autoplay is blocked, we'll try to play again when user interacts with the page
+        // but for now we'll just log it
+      });
+    }
+
     let loadedCount = 0;
     const totalAssets = assets.length;
 
@@ -78,14 +97,35 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
       setProgress(100);
       setCurrentAsset('Загрузка завершена!');
 
-      // Small delay to show completion before transitioning
-      setTimeout(() => {
-        onLoadingComplete();
-      }, 500);
+      // Fade out the background music before transitioning
+      const fadeOutInterval = setInterval(() => {
+        if (bgAudioRef.current && bgAudioRef.current.volume > 0.01) {
+          bgAudioRef.current.volume -= 0.05; // Gradually decrease volume
+        } else {
+          clearInterval(fadeOutInterval);
+          if (bgAudioRef.current) {
+            bgAudioRef.current.pause();
+            bgAudioRef.current.currentTime = 0; // Reset to beginning
+          }
+          
+          // Small delay to show completion before transitioning
+          setTimeout(() => {
+            onLoadingComplete();
+          }, 500);
+        }
+      }, 50); // Update volume every 50ms for smooth fade out
     };
 
     preloadAssets();
-  }, []);
+
+    // Cleanup function to stop music when component unmounts
+    return () => {
+      if (bgAudioRef.current) {
+        bgAudioRef.current.pause();
+        bgAudioRef.current.currentTime = 0;
+      }
+    };
+  }, [onLoadingComplete]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-300 via-green-200 to-yellow-100 flex flex-col items-center justify-center p-4">
