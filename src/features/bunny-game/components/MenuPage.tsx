@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import startImage from '/img/start.png';
 
 interface MenuPageProps {
@@ -6,6 +6,30 @@ interface MenuPageProps {
 }
 
 const MenuPage: React.FC<MenuPageProps> = ({ onNavigate }) => {
+  useEffect(() => {
+    // Create audio element for background music
+    const audio = new Audio('/sounds/bg.mp3');
+    audio.loop = true; // Make the music loop continuously
+    audio.volume = 0.5; // Set volume to 50% to avoid being too loud
+
+    // Play the background music when the component mounts
+    const playPromise = audio.play();
+    
+    // Handle potential autoplay policy violations
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Autoplay was prevented, this is expected in some browsers
+        console.log("Autoplay prevented:", error);
+      });
+    }
+
+    // Cleanup function to stop music when component unmounts or user navigates away
+    return () => {
+      audio.pause();
+      audio.currentTime = 0; // Reset to beginning for next play
+    };
+  }, []); // Empty dependency array means this effect runs only on mount and unmount
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8">
       <div className="max-w-5xl mx-auto flex flex-col items-center justify-center min-h-screen">
