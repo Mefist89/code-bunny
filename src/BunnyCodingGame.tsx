@@ -4,10 +4,11 @@ import LevelsPage from './features/bunny-game/components/LevelsPage';
 import HowToPlayPage from './features/bunny-game/components/HowToPlayPage';
 import CreatorsPage from './features/bunny-game/components/CreatorsPage';
 import GamePage from './features/bunny-game/components/GamePage';
+import LoadingPage from './features/bunny-game/components/LoadingPage';
 import { useGameEngine } from './features/bunny-game/hooks/useGameEngine';
 
 const BunnyCodingGame = () => {
-  const [currentPage, setCurrentPage] = useState('menu');
+  const [currentPage, setCurrentPage] = useState('loading'); // Start with loading page
   const gameEngine = useGameEngine();
 
   const handleNavigate = (page: string) => {
@@ -18,6 +19,10 @@ const BunnyCodingGame = () => {
     gameEngine.setLevel(levelIndex);
     setCurrentPage('game');
   };
+
+  if (currentPage === 'loading') {
+    return <LoadingPage onLoadingComplete={() => setCurrentPage('menu')} />;
+  }
 
   if (currentPage === 'menu') {
     return <MenuPage onNavigate={handleNavigate} />;
