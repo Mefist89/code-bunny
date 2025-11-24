@@ -40,7 +40,7 @@ const BunnyCodingGame = () => {
       level={gameEngine.level}
       levels={gameEngine.levels}
       bunnyPos={gameEngine.bunnyPos}
-      carrotPos={gameEngine.carrotPos}
+//       carrotPos={gameEngine.carrotPos}  // No longer needed since GamePage uses level.carrot
       commands={gameEngine.commands}
       currentStep={gameEngine.currentStep}
       isRunning={gameEngine.isRunning}

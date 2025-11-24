@@ -6,7 +6,6 @@ interface GamePageProps {
   level: Level;
   levels: Level[];
   bunnyPos: Position;
-  carrotPos: Position;
   commands: Command[];
   currentStep: number;
   isRunning: boolean;
@@ -29,7 +28,6 @@ const GamePage: React.FC<GamePageProps> = (props) => {
     level,
     levels,
     bunnyPos,
-    carrotPos,
     commands,
     currentStep,
     isRunning,
@@ -217,7 +215,7 @@ return (
                   const x = i % gridSize;
                   const y = Math.floor(i / gridSize);
                   const isBunny = bunnyPos.x === x && bunnyPos.y === y;
-                  const isCarrot = carrotPos.x === x && carrotPos.y === y;
+                  const isCarrot = level.carrot.x === x && level.carrot.y === y;
 
                   return (
                     <div
