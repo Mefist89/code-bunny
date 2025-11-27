@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-// Removed soundManager import since we're using HTML5 Audio API directly
+// Am eliminat importul soundManager deoarece folosim direct API-ul HTML5 Audio
 
 interface LoadingPageProps {
  onLoadingComplete: () => void;
@@ -7,13 +7,15 @@ interface LoadingPageProps {
 
 const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [currentAsset, setCurrentAsset] = useState('Загрузка...');
-  // Ref to keep track of the audio element for background music
+  const [currentAsset, setCurrentAsset] = useState('Se încarcă...');
+  // Ref pentru a urmări elementul audio pentru muzica de fundal
   const bgAudioRef = useRef<HTMLAudioElement | null>(null);
+  // Ref pentru a urmări intervalul de estompare a muzicii
+  const fadeOutIntervalRef = useRef<number | null>(null);
 
-  // List of all assets to preload
+  // Lista tuturor resurselor de preîncărcat
   const assets = [
-    // Images
+    // Imagini
     '/img/bunny1.png',
     '/img/bush1.png',
     '/img/carot1.png',
@@ -29,26 +31,26 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
     '/img/start.png',
     '/box1.png',
     '/box2.png',
-    // Sounds
+    // Sunete
     '/sounds/bg.mp3',
     '/sounds/bunny-ouch.mp3',
     '/sounds/carrot-crunch.mp3',
   ];
 
   useEffect(() => {
-    // Start background music when component mounts
+    // Pornește muzica de fundal când componenta este montată
     const bgAudio = new Audio('/sounds/bg.mp3');
     bgAudio.loop = true;
     bgAudio.volume = 0.5;
     bgAudioRef.current = bgAudio;
     
-    // Play the background music with error handling for autoplay policies
+    // Redă muzica de fundal cu gestionarea erorilor pentru politicile de autopornire
     const playPromise = bgAudio.play();
     if (playPromise !== undefined) {
       playPromise.catch(error => {
-        console.log("Autoplay prevented for background music:", error);
-        // If autoplay is blocked, we'll try to play again when user interacts with the page
-        // but for now we'll just log it
+        console.log("Redarea automată a fost prevenită pentru muzica de fundal:", error);
+        // Dacă redarea automată este blocată, vom încerca să o redăm din nou când utilizatorul interacționează cu pagina
+        // dar pentru moment vom doar înregistra eroarea
       });
     }
 
@@ -58,26 +60,26 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
     const preloadAssets = async () => {
       for (const asset of assets) {
         try {
-          setCurrentAsset(`Загрузка: ${asset.split('/').pop() || asset}`);
+          setCurrentAsset(`Se încarcă: ${asset.split('/').pop() || asset}`);
           
           if (asset.endsWith('.mp3')) {
-            // Preload audio
+            // Preîncarcă sunetul
             const audio = new Audio();
             audio.src = asset;
             await new Promise((resolve, reject) => {
               audio.oncanplaythrough = resolve;
               audio.onerror = reject;
-              // Set a timeout to avoid hanging on failed loads
+              // Stabilește un timp de așteptare pentru a evita blocarea la încărcările eșuate
               setTimeout(reject, 5000);
             });
           } else {
-            // Preload image
+            // Preîncarcă imaginea
             await new Promise((resolve, reject) => {
               const img = new Image();
               img.onload = resolve;
               img.onerror = reject;
               img.src = asset;
-              // Set a timeout to avoid hanging on failed loads
+              // Stabilește un timp de așteptare pentru a evita blocarea la încărcările eșuate
               setTimeout(reject, 5000);
             });
           }
@@ -86,43 +88,45 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
           const newProgress = Math.round((loadedCount / totalAssets) * 100);
           setProgress(newProgress);
         } catch (error) {
-          console.warn(`Failed to load asset: ${asset}`, error);
+          console.warn(`Nu s-a reușit încărcarea resursei: ${asset}`, error);
           loadedCount++;
           const newProgress = Math.round((loadedCount / totalAssets) * 100);
           setProgress(newProgress);
         }
       }
       
-      // Ensure progress reaches 100%
+      // Asigură-te că progresul ajunge la 100%
       setProgress(100);
-      setCurrentAsset('Загрузка завершена!');
+      setCurrentAsset('Încărcare completă!');
 
-      // Fade out the background music before transitioning
+      // Estompează muzica de fundal înainte de tranziție
       const fadeOutInterval = setInterval(() => {
         if (bgAudioRef.current && bgAudioRef.current.volume > 0.01) {
-          bgAudioRef.current.volume -= 0.05; // Gradually decrease volume
+          bgAudioRef.current.volume -= 0.05; // Scade treptat volumul
         } else {
           clearInterval(fadeOutInterval);
           if (bgAudioRef.current) {
             bgAudioRef.current.pause();
-            bgAudioRef.current.currentTime = 0; // Reset to beginning
+            bgAudioRef.current.currentTime = 0; // Resetează la început
           }
-          
-          // Small delay to show completion before transitioning
-          setTimeout(() => {
-            onLoadingComplete();
-          }, 500);
         }
-      }, 50); // Update volume every 50ms for smooth fade out
+      }, 50); // Actualizează volumul la fiecare 50ms pentru estompare lină
+      
+      // Salvează intervalul în ref pentru curățare
+      fadeOutIntervalRef.current = fadeOutInterval;
     };
 
     preloadAssets();
 
-    // Cleanup function to stop music when component unmounts
+    // Funcție de curățare pentru a opri muzica și intervalul când componenta este demontată
     return () => {
       if (bgAudioRef.current) {
         bgAudioRef.current.pause();
         bgAudioRef.current.currentTime = 0;
+      }
+      // Curăță intervalul dacă există
+      if (fadeOutIntervalRef.current) {
+        clearInterval(fadeOutIntervalRef.current);
       }
     };
   }, [onLoadingComplete]);
@@ -131,8 +135,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
     <div className="min-h-screen bg-gradient-to-b from-sky-300 via-green-200 to-yellow-100 flex flex-col items-center justify-center p-4">
       <div className="max-w-md w-full bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 text-center">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-green-700 mb-2">Добро пожаловать!</h1>
-          <p className="text-lg text-gray-600">Игра загружается...</p>
+          <h1 className="text-4xl font-bold text-green-700 mb-2">Bine ai venit!</h1>
+          <p className="text-lg text-gray-600">Jocul se încarcă...</p>
         </div>
 
         <div className="relative mb-6">
@@ -186,8 +190,20 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
         </div>
 
         <div className="mt-8 text-sm text-gray-500">
-          <p>Подготовка игрового поля...</p>
+          <p>Pregătirea câmpului de joc...</p>
         </div>
+
+        {/* Butonul de Start apare după ce încărcarea este completă și permite utilizatorului să acceseze meniul jocului */}
+        {progress === 100 && (
+          <div className="mt-6">
+            <button
+              onClick={onLoadingComplete}
+              className="px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 text-white font-bold rounded-full shadow-lg hover:from-green-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75"
+            >
+              Start {/* Cuvântul "Start" este păstrat în această formă pentru că este un termen universal recunoscut în interfețele de joc */}
+            </button>
+          </div>
+        )}
       </div>
       
       {/* Fun decorative elements */}
