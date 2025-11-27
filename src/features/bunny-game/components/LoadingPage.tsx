@@ -132,8 +132,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
   }, [onLoadingComplete]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-300 via-green-200 to-yellow-100 flex flex-col items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 text-center">
+    <div className="min-h-screen bg-gradient-to-b from-sky-300 via-green-200 to-yellow-100 flex flex-col items-center justify-center p-4" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
+      <div className="w-full bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 text-center" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-green-700 mb-2">Bine ai venit!</h1>
           <p className="text-lg text-gray-600">Jocul se încarcă...</p>
@@ -154,38 +154,92 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
           {currentAsset}
         </div>
 
-        <div className="flex justify-center">
-          <div className="relative">
-            {/* Animated bunny */}
-            <div className="animate-bounce">
-              <img 
-                src="/img/bunny1.png" 
-                alt="Bunny" 
-                className="w-24 h-24 object-contain"
-              />
-            </div>
-            
-            {/* Carrot that appears when progress is high */}
-            {progress > 30 && (
-              <div className={`absolute top-0 left-full ml-4 transition-all duration-1000 ${progress > 50 ? 'opacity-10' : 'opacity-0'}`}>
-                <img 
-                  src="/img/carot1.png" 
-                  alt="Carrot" 
-                  className="w-16 h-16 object-contain animate-pulse"
-                />
-              </div>
-            )}
-            
-            {/* Catapult that appears when progress is higher */}
-            {progress > 60 && (
-              <div className={`absolute top-0 right-full mr-4 transition-all duration-1000 ${progress > 80 ? 'opacity-10' : 'opacity-0'}`}>
-                <img 
-                  src="/img/catapult1.png" 
-                  alt="Catapult" 
-                  className="w-16 h-16 object-contain animate-spin"
-                />
-              </div>
-            )}
+        <style>{`
+          @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+          }
+          @keyframes bounce-normal {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+          }
+          @keyframes bounce-fast {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+          }
+          .animate-bounce-slow {
+            animation: bounce-slow 2s infinite;
+          }
+          .animate-bounce-normal {
+            animation: bounce-normal 1s infinite;
+          }
+          .animate-bounce-fast {
+            animation: bounce-fast 0.7s infinite;
+          }
+        `}</style>
+        
+        <div className="flex justify-center gap-4 items-end">
+          {/* Bunny - slow bounce */}
+          <div className="animate-bounce-slow">
+            <img 
+              src="/img/bunny1.png" 
+              alt="Bunny" 
+              className="w-20 h-20 object-contain"
+            />
+          </div>
+          
+          {/* Carrot - normal bounce */}
+          <div className="animate-bounce-normal">
+            <img 
+              src="/img/carot1.png" 
+              alt="Carrot" 
+              className="w-16 h-16 object-contain"
+            />
+          </div>
+          
+          {/* Rock - fast bounce */}
+          <div className="animate-bounce-fast">
+            <img 
+              src="/img/rock1.png" 
+              alt="Rock" 
+              className="w-16 h-16 object-contain"
+            />
+          </div>
+          
+          {/* Bush - slow bounce */}
+          <div className="animate-bounce-slow">
+            <img 
+              src="/img/bush1.png" 
+              alt="Bush" 
+              className="w-16 h-16 object-contain"
+            />
+          </div>
+          
+          {/* Wood - fast bounce */}
+          <div className="animate-bounce-fast">
+            <img 
+              src="/img/wood1.png" 
+              alt="Wood" 
+              className="w-16 h-16 object-contain"
+            />
+          </div>
+          
+          {/* Water - normal bounce */}
+          <div className="animate-bounce-normal">
+            <img 
+              src="/img/water1.png" 
+              alt="Water" 
+              className="w-16 h-16 object-contain"
+            />
+          </div>
+          
+          {/* Catapult - fast bounce */}
+          <div className="animate-bounce-fast">
+            <img 
+              src="/img/catapult1.png" 
+              alt="Catapult" 
+              className="w-16 h-16 object-contain"
+            />
           </div>
         </div>
 
@@ -206,11 +260,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoadingComplete }) => {
         )}
       </div>
       
-      {/* Fun decorative elements */}
-      <div className="absolute top-10 left-10 text-4xl animate-bounce">🌱</div>
-      <div className="absolute top-20 right-16 text-3xl animate-pulse">🐰</div>
-      <div className="absolute bottom-20 left-20 text-4xl animate-bounce delay-300">🍃</div>
-      <div className="absolute bottom-10 right-10 text-3xl animate-pulse delay-500">🥕</div>
+      {/* Decorative elements removed */}
     </div>
   );
 };

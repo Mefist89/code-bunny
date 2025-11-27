@@ -12,14 +12,14 @@ interface LevelsPageProps {
 
 const LevelsPage: React.FC<LevelsPageProps> = ({ levels, onSelectLevel, onNavigate }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 p-4 sm:p-8">
-      <div className="max-w-5xl mx-auto flex flex-col items-center py-6">
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 p-4 sm:p-8" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
+      <div className="w-full mx-auto flex flex-col items-center py-6" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
         <h1 className="text-4xl sm:text-5xl font-bold text-center mb-6 text-purple-600 flex items-center justify-center gap-3">
           <span className="text-5xl">🐰</span> Niveluri <span className="text-5xl">🥕</span>
         </h1>
         <p className="text-lg text-purple-500 mb-8 text-center">Alege un nivel și începe aventura!</p>
         
-        <div className="w-full max-w-4xl mb-8 bg-gradient-to-br from-pink-200 via-purple-100 to-blue-200 rounded-3xl border-4 border-pink-300 shadow-lg shadow-pink-100 overflow-hidden">
+        <div className="w-full mb-8 bg-gradient-to-br from-pink-200 via-purple-100 to-blue-200 rounded-3xl border-4 border-pink-300 shadow-lg shadow-pink-100 overflow-hidden">
           <div className="p-5 bg-gradient-to-r from-purple-400 to-pink-400">
             <p className="text-white font-bold text-xl text-center flex items-center justify-center gap-2">
               <span>✨</span> Alege un nivel <span>✨</span>

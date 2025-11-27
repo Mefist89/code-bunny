@@ -31,8 +31,8 @@ const MenuPage: React.FC<MenuPageProps> = ({ onNavigate }) => {
   }, []); // Empty dependency array means this effect runs only on mount and unmount
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8">
-      <div className="max-w-5xl mx-auto flex flex-col items-center justify-center min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
+      <div className="w-full mx-auto flex flex-col items-center justify-center min-h-screen" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
         <h1 className="text-5xl font-bold text-center mb-4 text-green-800 flex items-center justify-center gap-4">
           <img src="/img/bunny1.png" alt="Bunny" className="h-16 w-16 object-contain" />
           Code Bunny

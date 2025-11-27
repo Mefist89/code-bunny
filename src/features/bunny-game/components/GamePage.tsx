@@ -170,7 +170,7 @@ return (
          -o-animation: bunny-hop 0.4s cubic-bezier(0.42, 0, 0.58, 1);
        }
      `}</style>
-      <div className="max-w-5xl mx-auto" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
+      <div className="w-full mx-auto" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
         <h1 className="text-4xl font-bold text-center mb-2 text-green-800 flex items-center justify-center gap-4">
           <img src="/img/bunny1.png" alt="Bunny" className="h-12 w-12 object-contain" />
           Code Bunny

@@ -6,11 +6,11 @@ interface HowToPlayPageProps {
 
 const HowToPlayPage: React.FC<HowToPlayPageProps> = ({ onNavigate }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-4 sm:p-8">
-      <div className="max-w-6xl mx-auto flex flex-col items-center py-6">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-4 sm:p-8" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
+      <div className="w-full mx-auto flex flex-col items-center py-6" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
         <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 text-green-800">📋 Cum se joacă</h1>
         
-        <div className="bg-white rounded-xl shadow-lg p-6 max-w-4xl w-full mb-6">
+        <div className="bg-white rounded-xl shadow-lg p-6 w-full mb-6">
           {/* Game Objective */}
           <div className="mb-8 p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
             <h2 className="text-2xl font-bold text-green-700 mb-3 flex items-center gap-2">

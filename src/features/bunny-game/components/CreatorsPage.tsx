@@ -6,11 +6,11 @@ interface CreatorsPageProps {
 
 const CreatorsPage: React.FC<CreatorsPageProps> = ({ onNavigate }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8">
-      <div className="max-w-5xl mx-auto flex flex-col items-center py-10">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-8" style={{ transform: 'scale(1.20)', transformOrigin: 'top center' }}>
+      <div className="w-full mx-auto flex flex-col items-center py-10" style={{ transform: 'scale(0.87)', transformOrigin: 'top center' }}>
         <h1 className="text-4xl font-bold text-center mb-8 text-green-800">👨‍💻 Creatori</h1>
         
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-2xl w-full mb-8 text-center">
+        <div className="bg-white rounded-xl shadow-lg p-8 w-full mb-8 text-center">
           <div className="text-6xl mb-4">🐰🥕</div>
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Code Bunny</h2>
           <p className="text-gray-700 text-lg mb-4">
