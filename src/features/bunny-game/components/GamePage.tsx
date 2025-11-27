@@ -1,5 +1,6 @@
 import React from 'react';
 import { Play, RotateCcw, Trash2 } from 'lucide-react';
+import LevelCompleteModal from './LevelCompleteModal';
 import type { Level, Position, Command } from '../types/index';
 
 interface GamePageProps {
@@ -338,21 +339,6 @@ return (
         <div className="mt-6 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-6">
           <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Secvența ta de comenzi</h2>
           
-          {gameWon && (
-            <div className="mb-4 bg-green-100 border-4 border-green-500 rounded-lg p-4 text-center animate-bounce">
-              <p className="text-2xl font-bold text-green-800">🎉 Bravo! Ai reușit! 🎉</p>
-              <p className="text-green-700">Iepurașul a ajuns la morcov!</p>
-              {level.id < levels.length && (
-                <button
-                  onClick={onNextLevel}
-                  className="mt-3 bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 font-bold"
-                >
-                  Nivel următor →
-                </button>
-              )}
-            </div>
-          )}
-
           <div className="min-h-20 bg-gray-100 rounded-lg p-4 flex flex-wrap gap-2 justify-center">
             {commands.length === 0 ? (
               <p className="text-gray-400 text-center w-full">Apasă săgețile pentru a adăuga comenzi</p>
@@ -393,6 +379,9 @@ return (
             ))}
           </div>
         )}
+        
+        {/* Level Complete Modal */}
+        {gameWon && <LevelCompleteModal levelId={level.id} totalLevels={levels.length} onNextLevel={onNextLevel} />}
       </div>
     </div>
   );
