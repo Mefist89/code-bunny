@@ -298,6 +298,26 @@ const GamePage: React.FC<GamePageProps> = (props) => {
                   <span className="sm:hidden">Tot</span>
                 </button>
               </div>
+              <br></br>
+               {/* Action Buttons - Second on mobile */}
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 w-full max-w-sm mx-auto">
+              <button
+                onClick={onResetGame}
+                disabled={isRunning}
+                className="flex-1 sm:flex-initial bg-orange-500 text-white px-3 py-2 sm:px-4 rounded-lg hover:bg-orange-600 disabled:bg-gray-300 flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-base"
+              >
+                <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4" />
+                Reset
+              </button>
+              <button
+                onClick={onExecuteCommands}
+                disabled={isRunning || commands.length === 0}
+                className="flex-1 sm:flex-initial bg-green-500 text-white px-3 py-2 sm:px-4 rounded-lg hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-base font-bold"
+              >
+                <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+                Rulează
+              </button>
+            </div>
             </div>
           </div>
         </div>
