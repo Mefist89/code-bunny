@@ -130,6 +130,12 @@ export const useGameEngine = () => {
           // But first wait a bit to allow the catapult animation to show at the original position
           setTimeout(() => {
             setBunnyPos(launchPos);
+            // Check if the launch position is the carrot position (even if there's an obstacle)
+            // In this game logic, if the carrot is at the same position as an obstacle, the game should still be won
+            if (launchPos.x === currentLevel.carrot.x && launchPos.y === currentLevel.carrot.y) {
+              setGameWon(true);
+              soundManager.playCarrotCrunchSound();
+            }
           }, 300); // Delay to allow animation to be visible first
           
           // End animation after delay to allow visual effect to complete
@@ -146,6 +152,11 @@ export const useGameEngine = () => {
           // Move bunny to the launch position after a delay to allow animation to play at original position
           setTimeout(() => {
             setBunnyPos(launchPos);
+            // Check if the launch position is the carrot position
+            if (launchPos.x === currentLevel.carrot.x && launchPos.y === currentLevel.carrot.y) {
+              setGameWon(true);
+              soundManager.playCarrotCrunchSound();
+            }
           }, 300); // Delay to allow animation to be visible first
 
           // End animation after delay to allow visual effect to complete
@@ -187,6 +198,7 @@ export const useGameEngine = () => {
        if (pos.x === currentLevel.carrot.x && pos.y === currentLevel.carrot.y) {
          setGameWon(true);
          soundManager.playCarrotCrunchSound();
+         setBunnyPos(pos); // Ensure bunny position is updated to carrot position
          break;
        }
      }
